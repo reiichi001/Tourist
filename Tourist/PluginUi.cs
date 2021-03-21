@@ -40,6 +40,19 @@ namespace Tourist {
 
             if (ImGui.BeginMenuBar()) {
                 if (ImGui.BeginMenu("Options")) {
+                    if (ImGui.BeginMenu("Sort by")) {
+                        foreach (var mode in (SortMode[]) Enum.GetValues(typeof(SortMode))) {
+                            if (!ImGui.MenuItem($"{mode}", null, this.Plugin.Config.SortMode == mode)) {
+                                continue;
+                            }
+
+                            this.Plugin.Config.SortMode = mode;
+                            this.Plugin.Config.Save();
+                        }
+
+                        ImGui.EndMenu();
+                    }
+
                     if (ImGui.BeginMenu("Times")) {
                         var showTimeUntil = this.Plugin.Config.ShowTimeUntilAvailable;
                         if (ImGui.MenuItem("Show time until available", null, ref showTimeUntil)) {
@@ -56,16 +69,26 @@ namespace Tourist {
                         ImGui.EndMenu();
                     }
 
-                    var showFinished = this.Plugin.Config.ShowFinished;
-                    if (ImGui.MenuItem("Show finished", null, ref showFinished)) {
-                        this.Plugin.Config.ShowFinished = showFinished;
-                        this.Plugin.Config.Save();
-                    }
+                    if (ImGui.BeginMenu("Visibility")) {
+                        var showFinished = this.Plugin.Config.ShowFinished;
+                        if (ImGui.MenuItem("Show finished", null, ref showFinished)) {
+                            this.Plugin.Config.ShowFinished = showFinished;
+                            this.Plugin.Config.Save();
+                        }
 
-                    var showUnavailable = this.Plugin.Config.ShowUnavailable;
-                    if (ImGui.MenuItem("Show unavailable", null, ref showUnavailable)) {
-                        this.Plugin.Config.ShowUnavailable = showUnavailable;
-                        this.Plugin.Config.Save();
+                        var showUnavailable = this.Plugin.Config.ShowUnavailable;
+                        if (ImGui.MenuItem("Show unavailable", null, ref showUnavailable)) {
+                            this.Plugin.Config.ShowUnavailable = showUnavailable;
+                            this.Plugin.Config.Save();
+                        }
+
+                        var onlyCurrent = this.Plugin.Config.OnlyShowCurrentZone;
+                        if (ImGui.MenuItem("Show current zone only", null, ref onlyCurrent)) {
+                            this.Plugin.Config.OnlyShowCurrentZone = onlyCurrent;
+                            this.Plugin.Config.Save();
+                        }
+
+                        ImGui.EndMenu();
                     }
 
                     var showArrVistas = this.Plugin.Config.ShowArrVistas;
@@ -79,12 +102,6 @@ namespace Tourist {
                         } else {
                             this.Plugin.Markers.RemoveAllVfx();
                         }
-                    }
-
-                    var onlyCurrent = this.Plugin.Config.OnlyShowCurrentZone;
-                    if (ImGui.MenuItem("Only show vistas for current zone", null, ref onlyCurrent)) {
-                        this.Plugin.Config.OnlyShowCurrentZone = onlyCurrent;
-                        this.Plugin.Config.Save();
                     }
 
                     ImGui.EndMenu();
@@ -106,13 +123,20 @@ namespace Tourist {
             }
 
             if (ImGui.BeginChild("tourist-adventures", new Vector2(0, 0))) {
-                var adventures = this.Plugin.Interface.Data.GetExcelSheet<Adventure>();
+                const uint first = 2162688;
 
-                var row = 0;
-                foreach (var adventure in adventures) {
-                    var idx = row;
-                    row += 1;
+                var adventures = this.Plugin.Interface.Data.GetExcelSheet<Adventure>()
+                    .Select(adventure => (idx: adventure.RowId - first, adventure))
+                    .OrderBy(entry => this.Plugin.Config.SortMode switch {
+                        SortMode.Number => entry.idx,
+                        SortMode.Zone => entry.adventure.Level.Value.Map.Row,
+                        _ => throw new ArgumentOutOfRangeException(),
+                    });
 
+                Map? lastMap = null;
+                bool lastTree = false;
+
+                foreach (var (idx, adventure) in adventures) {
                     if (this.Plugin.Config.OnlyShowCurrentZone && adventure.Level.Value.Territory.Row != this.Plugin.Interface.ClientState.TerritoryType) {
                         continue;
                     }
@@ -127,6 +151,24 @@ namespace Tourist {
 
                     if (!this.Plugin.Config.ShowUnavailable && !available) {
                         continue;
+                    }
+
+                    if (this.Plugin.Config.SortMode == SortMode.Zone) {
+                        var map = adventure.Level.Value.Map.Value;
+                        if (lastMap != map) {
+                            if (lastMap != null) {
+                                ImGui.TreePop();
+                            }
+
+                            lastTree = ImGui.CollapsingHeader($"{map.PlaceName.Value.Name}");
+                            ImGui.TreePush();
+                        }
+
+                        lastMap = map;
+
+                        if (!lastTree) {
+                            continue;
+                        }
                     }
 
                     var availability = adventure.NextAvailable(this.Plugin.Weather);
@@ -148,7 +190,7 @@ namespace Tourist {
                         : $" ({(countdown.Value - DateTimeOffset.UtcNow).ToHumanReadable()})";
 
                     var name = this.Plugin.Interface.SeStringManager.Parse(adventure.Name.RawData.ToArray());
-                    var header = ImGui.CollapsingHeader($"#{row} - {name.TextValue}{next}###adventure-{adventure.RowId}");
+                    var header = ImGui.CollapsingHeader($"#{idx + 1} - {name.TextValue}{next}###adventure-{adventure.RowId}");
 
                     if (has || available) {
                         ImGui.PopStyleColor();
