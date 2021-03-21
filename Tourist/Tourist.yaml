@@ -1,0 +1,10 @@
+﻿name: Tourist
+author: ascclemens
+description: |-
+  Tourist adds a window to assist with the sightseeing log.
+
+  - Show when sightseeing log vistas are available
+  - Add markers for ARR vistas
+  - Open vista locations on your map
+  - Hide already completed or unavailable vistas
+  - Show the command needed for each vista
