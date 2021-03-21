@@ -20,33 +20,15 @@ namespace Tourist {
                 return;
             }
 
-            var x = ToMapCoordinate(loc!.X, map!.SizeFactor);
-            var y = ToMapCoordinate(loc.Z, map.SizeFactor);
             var mapLink = new MapLinkPayload(
                 @interface.Data,
                 terr.RowId,
-                map.RowId,
-                ConvertMapCoordinateToRawPosition(x, map.SizeFactor),
-                ConvertMapCoordinateToRawPosition(y, map.SizeFactor)
+                map!.RowId,
+                (int) (loc!.X * 1_000f),
+                (int) (loc.Z * 1_000f)
             );
 
             @interface.Framework.Gui.OpenMapWithMapLink(mapLink);
-        }
-
-        private static int ConvertMapCoordinateToRawPosition(float pos, float scale) {
-            var c = scale / 100.0f;
-
-            var scaledPos = ((pos - 1.0f) * c / 41.0f * 2048.0f - 1024.0f) / c;
-            scaledPos *= 1000.0f;
-
-            return (int) scaledPos;
-        }
-
-        private static float ToMapCoordinate(float val, float scale) {
-            var c = scale / 100f;
-
-            val *= c;
-            return 41f / c * ((val + 1024f) / 2048f) + 1;
         }
 
         private static DateTimeOffset EorzeaTime(DateTimeOffset? at = null) {
