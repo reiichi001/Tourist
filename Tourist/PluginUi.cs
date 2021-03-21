@@ -91,9 +91,13 @@ namespace Tourist {
                 }
 
                 if (ImGui.BeginMenu("Help")) {
-                    ImGui.PushTextWrapPos(ImGui.GetFontSize() * 10);
-                    ImGui.TextUnformatted("Vistas 21 to 80 require the completion of the first 20. Talk to Millith Ironheart in Old Gridania to unlock the rest.");
-                    ImGui.PopTextWrapPos();
+                    if (ImGui.BeginMenu("Can't unlock vistas 21 to 80")) {
+                        ImGui.PushTextWrapPos(ImGui.GetFontSize() * 10);
+                        ImGui.TextUnformatted("Vistas 21 to 80 require the completion of the first 20. Talk to Millith Ironheart in Old Gridania to unlock the rest.");
+                        ImGui.PopTextWrapPos();
+
+                        ImGui.EndMenu();
+                    }
 
                     ImGui.EndMenu();
                 }
