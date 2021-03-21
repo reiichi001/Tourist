@@ -10,11 +10,11 @@ namespace Tourist {
 
         internal DalamudPluginInterface Interface { get; private set; } = null!;
         internal Configuration Config { get; private set; } = null!;
-        internal PluginUi Ui { get; set; } = null!;
+        internal PluginUi Ui { get; private set; } = null!;
         internal FFXIVWeatherLuminaService Weather { get; private set; } = null!;
         internal GameFunctions Functions { get; private set; } = null!;
         private Commands Commands { get; set; } = null!;
-        internal Markers Markers { get; set; } = null!;
+        internal Markers Markers { get; private set; } = null!;
 
         public void Initialize(DalamudPluginInterface pluginInterface) {
             this.Interface = pluginInterface;
