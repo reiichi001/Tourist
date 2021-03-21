@@ -49,7 +49,7 @@ namespace Tourist {
             return 41f / c * ((val + 1024f) / 2048f) + 1;
         }
 
-        public static DateTimeOffset EorzeaTime(DateTimeOffset? at = null) {
+        private static DateTimeOffset EorzeaTime(DateTimeOffset? at = null) {
             at ??= DateTimeOffset.UtcNow;
             return DateTimeOffset.FromUnixTimeMilliseconds(at.Value.ToUnixTimeMilliseconds() * 144 / 7);
         }
@@ -65,15 +65,22 @@ namespace Tourist {
 
             var actualNow = DateTimeOffset.UtcNow;
 
-            if (!Availability.ContainsKey(adventure.RowId) && adventure.Available(service)) {
-                var ends = adventure.AvailabilityEnds(service, DateTimeOffset.Now) ?? default;
-                Availability[adventure.RowId] = (DateTimeOffset.Now, ends);
+            var contains = Availability.TryGetValue(adventure.RowId, out var cached);
+
+            switch (contains) {
+                // if the cache doesn't have this vista but it's currently available
+                case false when adventure.Available(service): {
+                    // determine the end availability and store that
+                    var ends = adventure.AvailabilityEnds(service, DateTimeOffset.Now) ?? default;
+                    Availability[adventure.RowId] = (DateTimeOffset.Now, ends);
+                    break;
+                }
+                // use the cached value if it hasn't expired
+                case true when cached.end >= actualNow:
+                    return cached;
             }
 
-            // check the cache and use that if it's not expired
-            if (Availability.TryGetValue(adventure.RowId, out var cached) && cached.end >= actualNow) {
-                return cached;
-            }
+            // otherwise, calculate and cache the availability
 
             var eorzea = EorzeaTime(actualNow);
             // start at a clean hour
