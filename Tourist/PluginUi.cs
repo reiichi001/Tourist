@@ -212,7 +212,7 @@ namespace Tourist {
                     ImGui.TextUnformatted("Eorzea time");
                     ImGui.NextColumn();
 
-                    if (adventure.MinTime != 0 && adventure.MaxTime != 0) {
+                    if (adventure.MinTime != 0 || adventure.MaxTime != 0) {
                         ImGui.TextUnformatted($"{adventure.MinTime / 100:00}:00 to {adventure.MaxTime / 100 + 1:00}:00");
                     } else {
                         ImGui.TextUnformatted("Any");
