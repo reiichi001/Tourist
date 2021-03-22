@@ -134,7 +134,7 @@ namespace Tourist {
                     });
 
                 Map? lastMap = null;
-                bool lastTree = false;
+                var lastTree = false;
 
                 foreach (var (idx, adventure) in adventures) {
                     if (this.Plugin.Config.OnlyShowCurrentZone && adventure.Level.Value.Territory.Row != this.Plugin.Interface.ClientState.TerritoryType) {
