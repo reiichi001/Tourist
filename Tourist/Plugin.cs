@@ -27,7 +27,7 @@ namespace Tourist {
                 throw new Exception("Missing gameData field");
             }
 
-            var lumina = (Lumina.Lumina) gameDataField.GetValue(this.Interface.Data);
+            var lumina = (Lumina.GameData) gameDataField.GetValue(this.Interface.Data);
             this.Weather = new FFXIVWeatherLuminaService(lumina);
 
             this.Functions = new GameFunctions(this);

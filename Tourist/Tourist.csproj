@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="Dalamud, Version=5.2.3.3, Culture=neutral, PublicKeyToken=null">
+        <Reference Include="Dalamud, Version=5.2.4.2, Culture=neutral, PublicKeyToken=null">
             <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Dalamud.dll</HintPath>
             <Private>False</Private>
         </Reference>
@@ -36,15 +36,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Costura.Fody" Version="5.0.2">
+        <PackageReference Include="Costura.Fody" Version="5.1.0">
             <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="DalamudPackager" Version="1.2.0"/>
-        <PackageReference Include="FFXIVWeather.Lumina" Version="1.1.1"/>
-        <PackageReference Include="Fody" Version="6.4.0">
+        <PackageReference Include="DalamudPackager" Version="1.2.1"/>
+        <PackageReference Include="FFXIVWeather.Lumina" Version="1.2.2"/>
+        <PackageReference Include="Fody" Version="6.5.1">
             <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 

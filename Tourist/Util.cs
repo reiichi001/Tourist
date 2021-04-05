@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Dalamud.Game.Chat.SeStringHandling.Payloads;
+using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Plugin;
 using FFXIVWeather.Lumina;
 using Lumina.Excel.GeneratedSheets;
