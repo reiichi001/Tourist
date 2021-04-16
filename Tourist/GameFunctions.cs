@@ -2,6 +2,7 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Dalamud.Hooking;
+using Dalamud.Plugin;
 
 namespace Tourist {
     public class GameFunctions : IDisposable {
@@ -46,7 +47,11 @@ namespace Tourist {
         }
 
         private IntPtr OnVistaUnlock(ushort index, int a2, int a3) {
-            this.Plugin.Markers.RemoveVfx(index);
+            try {
+                this.Plugin.Markers.RemoveVfx(index);
+            } catch (Exception ex) {
+                PluginLog.LogError(ex, "Exception in vista unlock");
+            }
 
             return this.VistaUnlockedHook.Original(index, a2, a3);
         }
