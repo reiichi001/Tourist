@@ -34,7 +34,12 @@ namespace Tourist {
         private void Draw() {
             ImGui.SetNextWindowSize(new Vector2(350f, 450f), ImGuiCond.FirstUseEver);
 
-            if (!this.Show || !ImGui.Begin(this.Plugin.Name, ref this._show, ImGuiWindowFlags.MenuBar)) {
+            if (!this.Show) {
+                return;
+            }
+
+            if (!ImGui.Begin(this.Plugin.Name, ref this._show, ImGuiWindowFlags.MenuBar)) {
+                ImGui.End();
                 return;
             }
 
