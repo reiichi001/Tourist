@@ -5,6 +5,7 @@
                 OutputPath="$(OutputPath)"
                 AssemblyName="$(AssemblyName)"
                 VersionComponents="3"
-                MakeZip="true"/>
+                MakeZip="true"
+                Exclude="Lumina.dll;Lumina.Excel.dll"/>
     </Target>
 </Project>
