@@ -130,7 +130,7 @@ namespace Tourist {
             if (ImGui.BeginChild("tourist-adventures", new Vector2(0, 0))) {
                 const uint first = 2162688;
 
-                var adventures = this.Plugin.DataManager.GetExcelSheet<Adventure>()
+                var adventures = this.Plugin.DataManager.GetExcelSheet<Adventure>()!
                     .Select(adventure => (idx: adventure.RowId - first, adventure))
                     .OrderBy(entry => this.Plugin.Config.SortMode switch {
                         SortMode.Number => entry.idx,
@@ -231,7 +231,7 @@ namespace Tourist {
                     if (Weathers.All.TryGetValue(adventure.RowId, out var weathers)) {
                         var weatherString = string.Join(", ", weathers
                             .OrderBy(id => id)
-                            .Select(id => this.Plugin.DataManager.GetExcelSheet<Weather>().GetRow(id))
+                            .Select(id => this.Plugin.DataManager.GetExcelSheet<Weather>()!.GetRow(id))
                             .Select(weather => weather.Name));
                         ImGui.TextUnformatted(weatherString);
                     } else {
