@@ -5,11 +5,6 @@
                 OutputPath="$(OutputPath)"
                 AssemblyName="$(AssemblyName)"
                 VersionComponents="3"
-                MakeZip="true"
-                Include="
-                    Tourist.dll;
-                    Tourist.pdb;
-                    Tourist.json
-                "/>
+                MakeZip="true"/>
     </Target>
 </Project>

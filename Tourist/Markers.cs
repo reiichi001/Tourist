@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Dalamud.Game.Internal;
-using Dalamud.Plugin;
+using Dalamud.Game;
+using Dalamud.Logging;
 using Lumina.Excel.GeneratedSheets;
 
 namespace Tourist {
@@ -17,22 +17,22 @@ namespace Tourist {
         public Markers(Plugin plugin) {
             this.Plugin = plugin;
 
-            this.Plugin.Interface.ClientState.TerritoryChanged += this.OnTerritoryChange;
-            this.Plugin.Interface.Framework.OnUpdateEvent += this.OnFrameworkUpdate;
+            this.Plugin.ClientState.TerritoryChanged += this.OnTerritoryChange;
+            this.Plugin.Framework.OnUpdateEvent += this.OnFrameworkUpdate;
 
             if (this.Plugin.Config.ShowArrVistas) {
-                this.SpawnVfxForCurrentZone(this.Plugin.Interface.ClientState.TerritoryType);
+                this.SpawnVfxForCurrentZone(this.Plugin.ClientState.TerritoryType);
             }
         }
 
         public void Dispose() {
-            this.Plugin.Interface.Framework.OnUpdateEvent -= this.OnFrameworkUpdate;
-            this.Plugin.Interface.ClientState.TerritoryChanged -= this.OnTerritoryChange;
+            this.Plugin.Framework.OnUpdateEvent -= this.OnFrameworkUpdate;
+            this.Plugin.ClientState.TerritoryChanged -= this.OnTerritoryChange;
             this.RemoveAllVfx();
         }
 
         internal void RemoveVfx(ushort index) {
-            var adventure = this.Plugin.Interface.Data.GetExcelSheet<Adventure>()
+            var adventure = this.Plugin.DataManager.GetExcelSheet<Adventure>()
                 .Skip(index)
                 .First();
 
@@ -54,7 +54,7 @@ namespace Tourist {
 
         internal void SpawnVfxForCurrentZone(ushort territory) {
             var row = 0;
-            foreach (var adventure in this.Plugin.Interface.Data.GetExcelSheet<Adventure>()) {
+            foreach (var adventure in this.Plugin.DataManager.GetExcelSheet<Adventure>()) {
                 if (row >= 80) {
                     break;
                 }
@@ -77,7 +77,7 @@ namespace Tourist {
             }
         }
 
-        private void OnTerritoryChange(object sender, ushort territory) {
+        private void OnTerritoryChange(object? sender, ushort territory) {
             if (!this.Plugin.Config.ShowArrVistas) {
                 return;
             }

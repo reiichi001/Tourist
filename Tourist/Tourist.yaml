@@ -1,5 +1,6 @@
 ﻿name: Tourist
 author: ascclemens
+punchline: Finish your sightseeing log.
 description: |-
   Tourist adds a window to assist with the sightseeing log.
 
@@ -8,4 +9,7 @@ description: |-
   - Open vista locations on your map
   - Hide already completed or unavailable vistas
   - Show the command needed for each vista
+
+  Icon: sightseeing by muhammad from the Noun Project
 repo_url: https://git.sr.ht/~jkcclemens/Tourist
+icon_url: https://annaclemens.io/assets/plugins/icons/tourist.png

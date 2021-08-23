@@ -1,5 +1,11 @@
 ﻿using System;
 using System.Reflection;
+using Dalamud.Data;
+using Dalamud.Game;
+using Dalamud.Game.ClientState;
+using Dalamud.Game.Command;
+using Dalamud.Game.Gui;
+using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Plugin;
 using FFXIVWeather.Lumina;
 
@@ -8,26 +14,50 @@ namespace Tourist {
     public class Plugin : IDalamudPlugin {
         public string Name => "Tourist";
 
-        internal DalamudPluginInterface Interface { get; private set; } = null!;
-        internal Configuration Config { get; private set; } = null!;
-        internal PluginUi Ui { get; private set; } = null!;
-        internal FFXIVWeatherLuminaService Weather { get; private set; } = null!;
-        internal GameFunctions Functions { get; private set; } = null!;
-        private Commands Commands { get; set; } = null!;
-        internal Markers Markers { get; private set; } = null!;
+        internal DalamudPluginInterface Interface { get; }
+        internal ClientState ClientState { get; }
+        internal CommandManager CommandManager { get; }
+        internal DataManager DataManager { get; }
+        internal Framework Framework { get; }
+        internal GameGui GameGui { get; }
+        internal SeStringManager SeStringManager { get; }
+        internal SigScanner SigScanner { get; }
 
-        public void Initialize(DalamudPluginInterface pluginInterface) {
+        internal Configuration Config { get; }
+        internal PluginUi Ui { get; }
+        internal FFXIVWeatherLuminaService Weather { get; }
+        internal GameFunctions Functions { get; }
+        private Commands Commands { get; }
+        internal Markers Markers { get; }
+
+        public Plugin(
+            DalamudPluginInterface pluginInterface,
+            ClientState clientState,
+            CommandManager commandManager,
+            DataManager dataManager,
+            Framework framework,
+            GameGui gameGui,
+            SeStringManager seStringManager,
+            SigScanner sigScanner
+        ) {
             this.Interface = pluginInterface;
+            this.ClientState = clientState;
+            this.CommandManager = commandManager;
+            this.DataManager = dataManager;
+            this.Framework = framework;
+            this.GameGui = gameGui;
+            this.SeStringManager = seStringManager;
+            this.SigScanner = sigScanner;
 
             this.Config = this.Interface.GetPluginConfig() as Configuration ?? new Configuration();
             this.Config.Initialise(this);
 
-            var gameDataField = this.Interface.Data.GetType().GetField("gameData", BindingFlags.Instance | BindingFlags.NonPublic);
+            var gameDataField = this.DataManager.GetType().GetField("gameData", BindingFlags.Instance | BindingFlags.NonPublic);
             if (gameDataField == null) {
                 throw new Exception("Missing gameData field");
             }
 
-            var lumina = (Lumina.GameData) gameDataField.GetValue(this.Interface.Data);
+            var lumina = (Lumina.GameData) gameDataField.GetValue(this.DataManager)!;
             this.Weather = new FFXIVWeatherLuminaService(lumina);
 
             this.Functions = new GameFunctions(this);

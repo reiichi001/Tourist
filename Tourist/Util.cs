@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dalamud.Game.Gui;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
-using Dalamud.Plugin;
 using FFXIVWeather.Lumina;
 using Lumina.Excel.GeneratedSheets;
 
@@ -11,7 +11,7 @@ namespace Tourist {
     public static class Util {
         private static Dictionary<uint, (DateTimeOffset start, DateTimeOffset end)> Availability { get; } = new();
 
-        public static void OpenMapLocation(this DalamudPluginInterface @interface, Adventure adventure) {
+        public static void OpenMapLocation(this GameGui gameGui, Adventure adventure) {
             var loc = adventure.Level?.Value;
             var map = loc?.Map?.Value;
             var terr = map?.TerritoryType?.Value;
@@ -21,14 +21,13 @@ namespace Tourist {
             }
 
             var mapLink = new MapLinkPayload(
-                @interface.Data,
                 terr.RowId,
                 map!.RowId,
                 (int) (loc!.X * 1_000f),
                 (int) (loc.Z * 1_000f)
             );
 
-            @interface.Framework.Gui.OpenMapWithMapLink(mapLink);
+            gameGui.OpenMapWithMapLink(mapLink);
         }
 
         private static DateTimeOffset EorzeaTime(DateTimeOffset? at = null) {
