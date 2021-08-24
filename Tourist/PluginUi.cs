@@ -27,7 +27,7 @@ namespace Tourist {
             this.Plugin.Interface.UiBuilder.Draw -= this.Draw;
         }
 
-        private void OpenConfig(object? sender, EventArgs eventArgs) {
+        private void OpenConfig() {
             this.Show = true;
         }
 
