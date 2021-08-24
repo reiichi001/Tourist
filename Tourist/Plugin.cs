@@ -6,6 +6,7 @@ using Dalamud.Game.ClientState;
 using Dalamud.Game.Command;
 using Dalamud.Game.Gui;
 using Dalamud.Game.Text.SeStringHandling;
+using Dalamud.IoC;
 using Dalamud.Plugin;
 using FFXIVWeather.Lumina;
 
@@ -15,13 +16,27 @@ namespace Tourist {
         public string Name => "Tourist";
 
         internal DalamudPluginInterface Interface { get; }
-        internal ClientState ClientState { get; }
-        internal CommandManager CommandManager { get; }
-        internal DataManager DataManager { get; }
-        internal Framework Framework { get; }
-        internal GameGui GameGui { get; }
-        internal SeStringManager SeStringManager { get; }
-        internal SigScanner SigScanner { get; }
+
+        [PluginService]
+        internal ClientState ClientState { get; init; } = null!;
+
+        [PluginService]
+        internal CommandManager CommandManager { get; init; } = null!;
+
+        [PluginService]
+        internal DataManager DataManager { get; init; } = null!;
+
+        [PluginService]
+        internal Framework Framework { get; init; } = null!;
+
+        [PluginService]
+        internal GameGui GameGui { get; init; } = null!;
+
+        [PluginService]
+        internal SeStringManager SeStringManager { get; init; } = null!;
+
+        [PluginService]
+        internal SigScanner SigScanner { get; init; } = null!;
 
         internal Configuration Config { get; }
         internal PluginUi Ui { get; }
@@ -30,24 +45,8 @@ namespace Tourist {
         private Commands Commands { get; }
         internal Markers Markers { get; }
 
-        public Plugin(
-            DalamudPluginInterface pluginInterface,
-            ClientState clientState,
-            CommandManager commandManager,
-            DataManager dataManager,
-            Framework framework,
-            GameGui gameGui,
-            SeStringManager seStringManager,
-            SigScanner sigScanner
-        ) {
+        public Plugin(DalamudPluginInterface pluginInterface) {
             this.Interface = pluginInterface;
-            this.ClientState = clientState;
-            this.CommandManager = commandManager;
-            this.DataManager = dataManager;
-            this.Framework = framework;
-            this.GameGui = gameGui;
-            this.SeStringManager = seStringManager;
-            this.SigScanner = sigScanner;
 
             this.Config = this.Interface.GetPluginConfig() as Configuration ?? new Configuration();
             this.Config.Initialise(this);

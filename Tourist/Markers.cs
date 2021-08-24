@@ -18,7 +18,7 @@ namespace Tourist {
             this.Plugin = plugin;
 
             this.Plugin.ClientState.TerritoryChanged += this.OnTerritoryChange;
-            this.Plugin.Framework.OnUpdateEvent += this.OnFrameworkUpdate;
+            this.Plugin.Framework.Update += this.OnFrameworkUpdate;
 
             if (this.Plugin.Config.ShowArrVistas) {
                 this.SpawnVfxForCurrentZone(this.Plugin.ClientState.TerritoryType);
@@ -26,7 +26,7 @@ namespace Tourist {
         }
 
         public void Dispose() {
-            this.Plugin.Framework.OnUpdateEvent -= this.OnFrameworkUpdate;
+            this.Plugin.Framework.Update -= this.OnFrameworkUpdate;
             this.Plugin.ClientState.TerritoryChanged -= this.OnTerritoryChange;
             this.RemoveAllVfx();
         }
