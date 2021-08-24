@@ -34,13 +34,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.0"/>
+        <PackageReference Include="DalamudPackager" Version="2.1.2"/>
         <PackageReference Include="FFXIVWeather.Lumina" Version="1.2.2"/>
     </ItemGroup>
 
     <ItemGroup>
         <Content Include="..\icon.png">
-            <Link>icon.png</Link>
+            <Link>images/icon.png</Link>
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
