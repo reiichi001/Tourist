@@ -1,11 +1,8 @@
-﻿using System;
-using System.Reflection;
-using Dalamud.Data;
+﻿using Dalamud.Data;
 using Dalamud.Game;
 using Dalamud.Game.ClientState;
 using Dalamud.Game.Command;
 using Dalamud.Game.Gui;
-using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using FFXIVWeather.Lumina;
@@ -33,9 +30,6 @@ namespace Tourist {
         internal GameGui GameGui { get; init; } = null!;
 
         [PluginService]
-        internal SeStringManager SeStringManager { get; init; } = null!;
-
-        [PluginService]
         internal SigScanner SigScanner { get; init; } = null!;
 
         internal Configuration Config { get; }
@@ -51,13 +45,7 @@ namespace Tourist {
             this.Config = this.Interface.GetPluginConfig() as Configuration ?? new Configuration();
             this.Config.Initialise(this);
 
-            var gameDataField = this.DataManager.GetType().GetField("gameData", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (gameDataField == null) {
-                throw new Exception("Missing gameData field");
-            }
-
-            var lumina = (Lumina.GameData) gameDataField.GetValue(this.DataManager)!;
-            this.Weather = new FFXIVWeatherLuminaService(lumina);
+            this.Weather = new FFXIVWeatherLuminaService(this.DataManager.GameData);
 
             this.Functions = new GameFunctions(this);
 

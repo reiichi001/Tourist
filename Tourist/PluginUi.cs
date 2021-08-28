@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Numerics;
+using Dalamud.Game.Text.SeStringHandling;
 using ImGuiNET;
 using Lumina.Excel.GeneratedSheets;
 
@@ -194,7 +195,7 @@ namespace Tourist {
                         ? string.Empty
                         : $" ({(countdown.Value - DateTimeOffset.UtcNow).ToHumanReadable()})";
 
-                    var name = this.Plugin.SeStringManager.Parse(adventure.Name.RawData.ToArray());
+                    var name = (SeString) adventure.Name;
                     var header = ImGui.CollapsingHeader($"#{idx + 1} - {name.TextValue}{next}###adventure-{adventure.RowId}");
 
                     if (has || available) {
