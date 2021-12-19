@@ -170,7 +170,7 @@ namespace Tourist {
                 return true;
             }
 
-            var (weather, _) = service.GetCurrentWeather(adventure.Level.Value.Territory.Value, offset);
+            var (weather, _) = service.GetCurrentWeather(adventure.Level.Value!.Territory.Value, offset);
 
             return weathers.Contains(weather.RowId);
         }

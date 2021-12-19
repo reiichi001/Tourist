@@ -61,7 +61,7 @@ namespace Tourist {
 
                 row += 1;
 
-                if (adventure.Level.Value.Territory.Row != territory) {
+                if (adventure.Level.Value!.Territory.Row != territory) {
                     continue;
                 }
 
