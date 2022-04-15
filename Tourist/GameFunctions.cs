@@ -25,7 +25,7 @@ namespace Tourist {
         public GameFunctions(Plugin plugin) {
             this.Plugin = plugin;
 
-            var vistaUnlockedPtr = this.Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 8B CD E8");
+            var vistaUnlockedPtr = this.Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B CE E8 ?? ?? ?? ?? E9");
             this.VistaUnlockedHook = new Hook<VistaUnlockedDelegate>(vistaUnlockedPtr, this.OnVistaUnlock);
             this.VistaUnlockedHook.Enable();
 
