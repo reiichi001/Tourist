@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net6.0-windows7.0": {
+      "DalamudPackager": {
+        "type": "Direct",
+        "requested": "[2.1.7, )",
+        "resolved": "2.1.7",
+        "contentHash": "jnZ/sdInyn07ycuWI+pPOtP/xE3v+c4+jYJfDt36FWnBF9NKqkpzfviJtPl/jGLgbaCmFIXu+Yid0N8GvdKefg=="
+      },
+      "FFXIVWeather.Lumina": {
+        "type": "Direct",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "s/vxBNJcUZWvAU6MJV0fjkOtEGt4CqUrX6IwbugOlSEMHk3D/unI9Kpv+FeS7gh3zOlP+earJmK4tifpqSvVmw==",
+        "dependencies": {
+          "Lumina": "3.5.2",
+          "Lumina.Excel": "6.1.1"
+        }
+      },
+      "Lumina": {
+        "type": "Transitive",
+        "resolved": "3.5.2",
+        "contentHash": "f5vbL3pJ+Azqu/ZOSiG1hblb8nUbWvtC0p9/uBTRYofvZZncBy3r6a/i4b16khI6thY705EGkuQGP00+rK7L5w=="
+      },
+      "Lumina.Excel": {
+        "type": "Transitive",
+        "resolved": "6.1.1",
+        "contentHash": "BCFmsn2iW8qXLuncvIxQEi/9mFprusM307JYVoSMK5UeQc2h2w524jlMGpI5wibh/Il+Wbwm5Dcy1gHuTGjw+Q==",
+        "dependencies": {
+          "Lumina": "3.5.2"
+        }
+      }
+    }
+  }
+}
