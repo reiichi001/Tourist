@@ -10,25 +10,25 @@
       },
       "FFXIVWeather.Lumina": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "s/vxBNJcUZWvAU6MJV0fjkOtEGt4CqUrX6IwbugOlSEMHk3D/unI9Kpv+FeS7gh3zOlP+earJmK4tifpqSvVmw==",
+        "requested": "[2.2.0, )",
+        "resolved": "2.2.0",
+        "contentHash": "zGYBjw7iRY3fUYuDGDaroiPES123esZ07th+H/cKsIZsfs5960B9EDjyEHxu1NlA0txKMGLbNMjINUmE4XImsg==",
         "dependencies": {
-          "Lumina": "3.5.2",
-          "Lumina.Excel": "6.1.1"
+          "Lumina": "3.9.0",
+          "Lumina.Excel": "6.2.0"
         }
       },
       "Lumina": {
         "type": "Transitive",
-        "resolved": "3.5.2",
-        "contentHash": "f5vbL3pJ+Azqu/ZOSiG1hblb8nUbWvtC0p9/uBTRYofvZZncBy3r6a/i4b16khI6thY705EGkuQGP00+rK7L5w=="
+        "resolved": "3.9.0",
+        "contentHash": "2ADC9iN8yUHXELq3IIQAK1cvi2kp53l1CDmAnrsTwBXJ9o9anIC+X6TzFRxWuRvTVI/MEMHTjwBobGwBGc3XhQ=="
       },
       "Lumina.Excel": {
         "type": "Transitive",
-        "resolved": "6.1.1",
-        "contentHash": "BCFmsn2iW8qXLuncvIxQEi/9mFprusM307JYVoSMK5UeQc2h2w524jlMGpI5wibh/Il+Wbwm5Dcy1gHuTGjw+Q==",
+        "resolved": "6.2.0",
+        "contentHash": "gIPr/Q4HhYDL65h/9b0srdL+Nfxk90T7aIciLnpl/QaBdc7tGRPzUmq0FU2QjErkikhrFOrb4Fp5NkQaN3DQDA==",
         "dependencies": {
-          "Lumina": "3.5.2"
+          "Lumina": "3.9.0"
         }
       }
     }
