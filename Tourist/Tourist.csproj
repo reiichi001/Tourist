@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <Version>1.2.10</Version>
-        <TargetFramework>net6-windows</TargetFramework>
+        <TargetFramework>net7-windows</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -47,7 +47,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.8"/>
+        <PackageReference Include="DalamudPackager" Version="2.1.11"/>
         <PackageReference Include="FFXIVWeather.Lumina" Version="2.2.0"/>
     </ItemGroup>
 

@@ -6,16 +6,16 @@ using Dalamud.Logging;
 
 namespace Tourist {
     public class GameFunctions : IDisposable {
-        private delegate IntPtr VistaUnlockedDelegate(ushort index, int a2, int a3);
+        private delegate nint VistaUnlockedDelegate(ushort index, int a2, int a3);
 
-        private delegate IntPtr CreateVfxDelegate(string name);
+        private delegate nint CreateVfxDelegate(string name);
 
-        private delegate IntPtr PlayVfxDelegate(IntPtr vfx, float idk, int idk2);
+        private delegate nint PlayVfxDelegate(nint vfx, float idk, int idk2);
 
-        internal delegate IntPtr RemoveVfxDelegate(IntPtr vfx);
+        internal delegate nint RemoveVfxDelegate(nint vfx);
 
         private Plugin Plugin { get; }
-        private IntPtr SightseeingMaskPointer { get; }
+        private nint SightseeingMaskPointer { get; }
 
         private CreateVfxDelegate CreateVfx { get; }
         private PlayVfxDelegate PlayVfxInternal { get; }
@@ -46,7 +46,7 @@ namespace Tourist {
             this.VistaUnlockedHook.Dispose();
         }
 
-        private IntPtr OnVistaUnlock(ushort index, int a2, int a3) {
+        private nint OnVistaUnlock(ushort index, int a2, int a3) {
             try {
                 this.Plugin.Markers.RemoveVfx(index);
             } catch (Exception ex) {
@@ -56,7 +56,7 @@ namespace Tourist {
             return this.VistaUnlockedHook.Original(index, a2, a3);
         }
 
-        public unsafe IntPtr SpawnVfx(string name, Vector3 position) {
+        public unsafe nint SpawnVfx(string name, Vector3 position) {
             var vfx = this.CreateVfx(name);
 
             var pos = (float*) (vfx + 80);
@@ -75,12 +75,12 @@ namespace Tourist {
             return vfx;
         }
 
-        internal bool PlayVfx(IntPtr vfx) {
-            return this.PlayVfxInternal(vfx, 0.0f, -1) == IntPtr.Zero;
+        internal bool PlayVfx(nint vfx) {
+            return this.PlayVfxInternal(vfx, 0.0f, -1) == nint.Zero;
         }
 
         public bool HasVistaUnlocked(short index) {
-            if (this.SightseeingMaskPointer == IntPtr.Zero) {
+            if (this.SightseeingMaskPointer == nint.Zero) {
                 return false;
             }
 

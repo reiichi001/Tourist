@@ -11,8 +11,8 @@ namespace Tourist {
         private const string MarkerPath = "bgcommon/world/common/vfx_for_live/eff/b0810_tnsk_y.avfx";
 
         private Plugin Plugin { get; }
-        private Dictionary<uint, IntPtr> Spawned { get; } = new();
-        private HashSet<IntPtr> Queue { get; } = new();
+        private Dictionary<uint, nint> Spawned { get; } = new();
+        private HashSet<nint> Queue { get; } = new();
 
         public Markers(Plugin plugin) {
             this.Plugin = plugin;
