@@ -1,5 +1,5 @@
 ﻿name: Tourist
-author: ascclemens
+author: Anna
 punchline: Finish your sightseeing log.
 description: |-
   Tourist adds a window to assist with the sightseeing log.
@@ -11,4 +11,4 @@ description: |-
   - Show the command needed for each vista
 
   Icon: sightseeing by muhammad from the Noun Project
-repo_url: https://git.annaclemens.io/ascclemens/Tourist
+repo_url: https://git.anna.lgbt/anna/Tourist
