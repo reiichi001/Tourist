@@ -2,7 +2,6 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Dalamud.Hooking;
-using Dalamud.Logging;
 
 namespace Tourist {
     public class GameFunctions : IDisposable {
@@ -26,7 +25,7 @@ namespace Tourist {
             this.Plugin = plugin;
 
             var vistaUnlockedPtr = this.Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B CE E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 8B 7C 24");
-            this.VistaUnlockedHook = Hook<VistaUnlockedDelegate>.FromAddress(vistaUnlockedPtr, this.OnVistaUnlock);
+            this.VistaUnlockedHook = this.Plugin.GameInteropProvider.HookFromAddress<VistaUnlockedDelegate>(vistaUnlockedPtr, this.OnVistaUnlock);
             this.VistaUnlockedHook.Enable();
 
             var maskPtr = this.Plugin.SigScanner.GetStaticAddressFromSig("8B F2 48 8D 0D ?? ?? ?? ?? 8B D3");
@@ -50,7 +49,7 @@ namespace Tourist {
             try {
                 this.Plugin.Markers.RemoveVfx(index);
             } catch (Exception ex) {
-                PluginLog.LogError(ex, "Exception in vista unlock");
+                Plugin.Log.Error(ex, "Exception in vista unlock");
             }
 
             return this.VistaUnlockedHook.Original(index, a2, a3);

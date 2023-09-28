@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Dalamud.Game;
-using Dalamud.Logging;
+using Dalamud.Plugin.Services;
 using Lumina.Excel.GeneratedSheets;
 
 namespace Tourist {
@@ -77,7 +76,7 @@ namespace Tourist {
             }
         }
 
-        private void OnTerritoryChange(object? sender, ushort territory) {
+        private void OnTerritoryChange(ushort territory) {
             if (!this.Plugin.Config.ShowArrVistas) {
                 return;
             }
@@ -86,11 +85,11 @@ namespace Tourist {
                 this.RemoveAllVfx();
                 this.SpawnVfxForCurrentZone(territory);
             } catch (Exception ex) {
-                PluginLog.LogError(ex, "Exception in territory change");
+                Plugin.Log.Error(ex, "Exception in territory change");
             }
         }
 
-        private void OnFrameworkUpdate(Framework framework) {
+        private void OnFrameworkUpdate(IFramework framework1) {
             foreach (var vfx in this.Queue.ToArray()) {
                 if (this.Plugin.Functions.PlayVfx(vfx)) {
                     this.Queue.Remove(vfx);

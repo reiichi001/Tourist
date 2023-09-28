@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Dalamud.Game.Gui;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
+using Dalamud.Plugin.Services;
 using FFXIVWeather.Lumina;
 using Lumina.Excel.GeneratedSheets;
 
@@ -11,7 +11,7 @@ namespace Tourist {
     public static class Util {
         private static Dictionary<uint, (DateTimeOffset start, DateTimeOffset end)> Availability { get; } = new();
 
-        public static void OpenMapLocation(this GameGui gameGui, Adventure adventure) {
+        public static void OpenMapLocation(this IGameGui gameGui, Adventure adventure) {
             var loc = adventure.Level?.Value;
             var map = loc?.Map?.Value;
             var terr = map?.TerritoryType?.Value;

@@ -39,7 +39,7 @@ namespace Tourist {
                 return;
             }
 
-            if (!ImGui.Begin(this.Plugin.Name, ref this._show, ImGuiWindowFlags.MenuBar)) {
+            if (!ImGui.Begin(Plugin.Name, ref this._show, ImGuiWindowFlags.MenuBar)) {
                 ImGui.End();
                 return;
             }
