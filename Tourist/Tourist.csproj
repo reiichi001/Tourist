@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.2.13</Version>
+        <Version>1.2.14</Version>
         <TargetFramework>net7-windows</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
@@ -47,8 +47,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.11"/>
-        <PackageReference Include="FFXIVWeather.Lumina" Version="2.2.0"/>
+        <PackageReference Include="DalamudPackager" Version="2.1.12" />
+        <PackageReference Include="FFXIVWeather.Lumina" Version="2.2.0" />
     </ItemGroup>
 
 </Project>
