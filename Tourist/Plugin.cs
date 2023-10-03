@@ -13,7 +13,7 @@ namespace Tourist {
         internal static IPluginLog Log { get; private set; } = null!;
 
         [PluginService]
-        internal DalamudPluginInterface Interface { get; }
+        internal DalamudPluginInterface Interface { get; init; }
 
         [PluginService]
         internal IClientState ClientState { get; init; } = null!;
