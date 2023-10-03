@@ -28,7 +28,7 @@ namespace Tourist {
             this.VistaUnlockedHook = this.Plugin.GameInteropProvider.HookFromAddress<VistaUnlockedDelegate>(vistaUnlockedPtr, this.OnVistaUnlock);
             this.VistaUnlockedHook.Enable();
 
-            var maskPtr = this.Plugin.SigScanner.GetStaticAddressFromSig("8B F2 48 8D 0D ?? ?? ?? ?? 8B D3");
+            var maskPtr = this.Plugin.SigScanner.GetStaticAddressFromSig("8B EA 48 8D 0D ?? ?? ?? ?? 8B D3");
             this.SightseeingMaskPointer = maskPtr;
 
             var createVfxPtr = this.Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? F3 0F 10 35 ?? ?? ?? ?? 48 89 43 08");
