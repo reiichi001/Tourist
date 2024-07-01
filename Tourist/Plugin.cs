@@ -13,7 +13,7 @@ namespace Tourist {
         internal static IPluginLog Log { get; private set; } = null!;
 
         [PluginService]
-        internal DalamudPluginInterface Interface { get; init; }
+        internal IDalamudPluginInterface Interface { get; init; }
 
         [PluginService]
         internal IClientState ClientState { get; init; } = null!;
@@ -43,7 +43,7 @@ namespace Tourist {
         private Commands Commands { get; }
         internal Markers Markers { get; }
 
-        public Plugin(DalamudPluginInterface pluginInterface) {
+        public Plugin(IDalamudPluginInterface pluginInterface) {
             this.Interface = pluginInterface;
 
             this.Config = this.Interface.GetPluginConfig() as Configuration ?? new Configuration();
