@@ -49,6 +49,8 @@
     <ItemGroup>
         <PackageReference Include="DalamudPackager" Version="2.1.13" />
         <PackageReference Include="FFXIVWeather.Lumina" Version="2.2.0" />
+        <PackageReference Include="Lumina" Version="4.1.0" PrivateAssets="all" />
+        <PackageReference Include="Lumina.Excel" Version="7.0.0" PrivateAssets="all" />
     </ItemGroup>
 
 </Project>

@@ -19,17 +19,27 @@
         }
       },
       "Lumina": {
-        "type": "Transitive",
-        "resolved": "3.9.0",
-        "contentHash": "2ADC9iN8yUHXELq3IIQAK1cvi2kp53l1CDmAnrsTwBXJ9o9anIC+X6TzFRxWuRvTVI/MEMHTjwBobGwBGc3XhQ=="
+        "type": "Direct",
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "bl+CdE2TXGU6aUCiqcrqiiiXJ0eGpfK0c+CwvCL+SY78ydV/zMqLH61XsU1+4CsjSU1+jDiRlLw2/0bIIE6guQ==",
+        "dependencies": {
+          "Microsoft.Extensions.ObjectPool": "9.0.0-preview.1.24081.5"
+        }
       },
       "Lumina.Excel": {
-        "type": "Transitive",
-        "resolved": "6.2.0",
-        "contentHash": "gIPr/Q4HhYDL65h/9b0srdL+Nfxk90T7aIciLnpl/QaBdc7tGRPzUmq0FU2QjErkikhrFOrb4Fp5NkQaN3DQDA==",
+        "type": "Direct",
+        "requested": "[7.0.0, )",
+        "resolved": "7.0.0",
+        "contentHash": "hZ0Nydtz9ln9k6P4hjZtE+RJbS3E0GsPhkhUy5NOVTHaSRYgkB/SCrBh0Cv8O1+5oOh7cOXfdHHaykYtS0Cn9w==",
         "dependencies": {
-          "Lumina": "3.9.0"
+          "Lumina": "3.15.2"
         }
+      },
+      "Microsoft.Extensions.ObjectPool": {
+        "type": "Transitive",
+        "resolved": "9.0.0-preview.1.24081.5",
+        "contentHash": "aAR7YW+pUUdvHk3vj7GtAi71dWGDIuY9270lsmQ6lKw23zzY+r8pLP3cGNbJdlnA9VWl+S+gnIVkBCqj2ROlEg=="
       }
     }
   }
